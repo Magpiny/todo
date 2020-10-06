@@ -25,7 +25,7 @@ class TodoApp extends Component {
      createNewTodo = (task) => {
          if(!this.state.todoItems.find(item => item.action == task)){
            this.setState({
-            todoItems : [ ...this.state.todoItems, { action:task, done:false }]
+            todoItems : [ ...this.state.todoItems, { action:task, done:false } ]
             });
          }
      }
@@ -64,7 +64,6 @@ class TodoApp extends Component {
           
           </div>
       )
-   
    };
 
  }
