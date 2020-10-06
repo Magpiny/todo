@@ -29,11 +29,11 @@ class TodoApp extends Component {
             });
          }
      }
-     toggleTodo = (todo) = this.setState({ todoItems : this.state.todoItems.map(item => item.action === todo.action ? {...item, done: !item.done} : item )
+     toggleTodo = (todo) => this.setState({ todoItems : this.state.todoItems.map(item => item.action === todo.action ? {...item, done: !item.done} : item )
 
       });
 
-   todoTableRows = () = {
+   todoTableRows = () => {
    this.state.todoItems.map(
     <TodoRow key = { item.action } item = { item } callback = { this.toggleTodo }  />
 
