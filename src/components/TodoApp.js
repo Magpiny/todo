@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
-
+import React, { Component } from 'rect';
+import {TodoBanner} from './TodoBanner';
+import { TodoCreator } from 'TodoCreator';
+import { TodoRow } from './TodoRow';
+//mport { VisibilityControl } from './VisibilityControl';
 
 
 class TodoApp extends Component {
@@ -13,9 +16,11 @@ class TodoApp extends Component {
             {action: 'Code code' , done:false},
             {action: 'Do alaundry', done:true},
             { action: 'Attend party', done:false }
-        ]
+        ],
+        showCompleted : true
 
-       };
+
+       }
     }
 
     updateTextValue = (e) => {
@@ -69,3 +74,4 @@ class TodoApp extends Component {
  }
 
 
+export default TodoApp;

@@ -2,13 +2,11 @@ import React from 'react';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import TodoApp from './components/TodoApp';
 
 function App() {
   return (
-    <div className="bg-primary text-center text-white p-2">
-        Todo list App
-
-    </div>
+    <TodoApp />
   );
 }
 
