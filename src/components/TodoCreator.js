@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 
-export class TodoaCreator extends Component {
+export class TodoCreator extends Component {
     constructor(props){
         super(props);
         this.state = { newItemText : "" }
@@ -15,17 +15,19 @@ export class TodoaCreator extends Component {
         this.props.callback(this.state.newItemText);
         this.setState({ newItemText : "" });
     };
-    render(){
+    render = () => {
         return(
 
         <div className="my-1">
-            <input className="form-control" value ={this.state.newItemText} onChange = { this.updateNewTextValue } />
+          <input className="form-control" value ={this.state.newItemText} onChange = { this.updateNewTextValue } />
 
-           <button className="btn btn-primary mt-1" 
+           <button className="btn btn-primary mt-1"
            onClick = { this.createNewTodo } >
                 Add
             </button>
         
         </div>
     )
+}
+
 }

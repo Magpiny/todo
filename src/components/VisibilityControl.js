@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 
 
-export class VisibilityaControl extends Component {
+export class VisibilityControl extends Component {
     
     render = () => {
 

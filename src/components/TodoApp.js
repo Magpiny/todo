@@ -1,8 +1,8 @@
-import React, { Component } from 'rect';
+import React, { Component } from 'react';
 import {TodoBanner} from './TodoBanner';
-import { TodoCreator } from 'TodoCreator';
+import { TodoCreator } from './TodoCreator';
 import { TodoRow } from './TodoRow';
-//mport { VisibilityControl } from './VisibilityControl';
+import { VisibilityControl } from './VisibilityControl';
 
 
 class TodoApp extends Component {
@@ -28,7 +28,7 @@ class TodoApp extends Component {
      }
 
      createNewTodo = (task) => {
-         if(!this.state.todoItems.find(item => item.action == task)){
+         if(!this.state.todoItems.find(item => item.action === task)){
            this.setState({
             todoItems : [ ...this.state.todoItems, { action:task, done:false } ]
             });
@@ -38,12 +38,9 @@ class TodoApp extends Component {
 
       });
 
-   todoTableRows = () => {
-   this.state.todoItems.map(
-    <TodoRow key = { item.action } item = { item } callback = { this.toggleTodo }  />
-
-   )
-   };
+   todoTableRows = (doneValue) => {
+   this.state.todoItems.filter(item => item.done === doneValue).map(item => 
+    <TodoRow key = { item.action } item = { item } callback = { this.toggleTodo }  />  )};
 
    render(){
       return(
@@ -62,9 +59,26 @@ class TodoApp extends Component {
                   </thead>
 
                   <tbody>
-                  { this.todoTableRows }
+                  { this.todoTableRows(false) }
                   </tbody>
                   </table>
+                  <div className="bg-secondary text-white text-center  p-2">
+                   <VisibilityControl description="Completed Tasks" isChecked = { this.state.showCompleted } callback = { (checked) => this.setState({ showCompleted : checked }) }  />
+
+                  </div>
+              { 
+              this.state.showCompleted && 
+              <table className="table table-striped table-bordered">
+                  <thead>
+                      <tr>
+                          <th>Description</th>
+                          <th>Done </th>
+                      </tr>
+                  </thead>
+                  <tbody>{ this.todoTableRows }</tbody>
+              </table>
+
+              }
               </div>
           
           </div>
