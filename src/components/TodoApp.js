@@ -30,8 +30,7 @@ class TodoApp extends Component {
      createNewTodo = (task) => {
          if(!this.state.todoItems.find(item => item.action === task)){
            this.setState({
-            todoItems : [ ...this.state.todoItems, { action:task, done:false } ]
-            });
+            todoItems : [ ...this.state.todoItems, { action:task, done:false }] }, () => localStorage.setItem("todoList", JSON.stringify(this.state)));
          }
      }
      toggleTodo = (todo) => this.setState({ todoItems : this.state.todoItems.map(item => item.action === todo.action ? {...item, done: !item.done} : item )
@@ -42,6 +41,24 @@ class TodoApp extends Component {
    this.state.todoItems.filter(item => item.done === doneValue).map(item => 
     <TodoRow key = { item.action } item = { item } callback = { this.toggleTodo }  />  )};
 
+    ///localStorage api in action
+componentDidMount = () => {
+    let data = localStorage.getItem("todoList");
+    this.setState(
+    data != null ? JSON.parse(data) : {
+
+        userName : 'Sam',
+        todoItems : [
+              { action: 'Buy Supper', done:false},
+              {action: 'Code code' , done:false},
+              {action: 'Do alaundry', done:true},
+              { action: 'Attend party', done:false }
+              ],
+         showCompleted : true
+
+    });
+}
+
    render(){
       return(
           <div>
@@ -50,7 +67,7 @@ class TodoApp extends Component {
               <div className = "container-fluid">
                   <TodoCreator callback = { this.createNewTodo } />
 
-                  <table className = "table table-striped table-bordered">
+               <table className = "table table-striped table-bordered">
 
                   <thead>
                   <tr>
@@ -75,7 +92,7 @@ class TodoApp extends Component {
                           <th>Done </th>
                       </tr>
                   </thead>
-                  <tbody>{ this.todoTableRows }</tbody>
+                  <tbody>{ this.todoTableRows(true) }</tbody>
               </table>
 
               }
